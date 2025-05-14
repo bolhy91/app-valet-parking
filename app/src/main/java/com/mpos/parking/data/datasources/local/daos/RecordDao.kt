@@ -3,8 +3,10 @@ package com.mpos.parking.data.datasources.local.daos
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.mpos.parking.data.datasources.local.entities.RecordEntity
+import com.mpos.parking.data.datasources.local.relations.RecordWithDetails
 
 @Dao
 interface RecordDao {
@@ -22,4 +24,8 @@ interface RecordDao {
 
     @Query("SELECT * FROM records")
     suspend fun getAll(): List<RecordEntity>
+
+    @Transaction
+    @Query("SELECT * FROM records")
+    suspend fun getAllRecordsWithDetails(): List<RecordWithDetails>
 }

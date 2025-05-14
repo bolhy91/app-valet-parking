@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MposValetParking</string>
+    <string name="title_driver">Datos del Conductor</string>
+    <string name="name">Nombre</string>
+    <string name="dni">Cédula</string>
+    <string name="movil">Móvil</string>
+    <string name="continues">Continuar</string>
+    <string name="title_vehicler">Datos del Vehículo</string>
+    <string name="place">Placa</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="color">Color</string>
+    <string name="valet_parking">Valet Parking</string>
 </resources>

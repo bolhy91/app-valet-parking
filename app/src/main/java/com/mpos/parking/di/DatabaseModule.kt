@@ -1,15 +1,14 @@
 package com.mpos.parking.di
 
 import android.content.Context
-import androidx.room.Room
 import com.mpos.parking.data.datasources.local.ParkingDatabase
 import com.mpos.parking.data.datasources.local.daos.DriverDao
 import com.mpos.parking.data.datasources.local.daos.RecordDao
 import com.mpos.parking.data.datasources.local.daos.VehicleDao
-import com.mpos.parking.utils.Constant.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -18,12 +17,8 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideDatabase(appContext: Context): ParkingDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            ParkingDatabase::class.java,
-            DATABASE_NAME
-        ).build()
+    fun provideDatabase(@ApplicationContext appContext: Context): ParkingDatabase {
+        return ParkingDatabase.getDatabase(appContext)
     }
 
     @Provides
@@ -34,4 +29,7 @@ object DatabaseModule {
 
     @Provides
     fun provideVehicleDao(db: ParkingDatabase): VehicleDao = db.vehicleDao()
+
+    @Provides
+    fun provideParkingDao(db: ParkingDatabase) = db.parkingDao()
 }
