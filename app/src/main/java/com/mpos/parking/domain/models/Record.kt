@@ -1,9 +1,9 @@
 package com.mpos.parking.domain.models
 
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
 
 data class Record(
-    val id: String,
+    val id: Int,
     val vehicle: Vehicle,
     val driver: Driver,
     val entryTime: LocalDateTime,

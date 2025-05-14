@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import kotlinx.datetime.LocalDateTime
 
 @Entity(
     tableName = "records",
@@ -26,8 +27,8 @@ data class RecordEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "vehicle_id", index = true) val vehicleId: Int,
     @ColumnInfo(name = "driver_id", index = true) val driverId: Int,
-    @ColumnInfo(name = "entry_time") val entryTime: String,
-    @ColumnInfo(name = "exit_time") val exitTime: String? = null,
+    @ColumnInfo(name = "entry_time") val entryTime: LocalDateTime,
+    @ColumnInfo(name = "exit_time") val exitTime: LocalDateTime? = null,
     @ColumnInfo(name = "position_number") val positionNumber: String? = null,
     val observation: String? = null,
 )
