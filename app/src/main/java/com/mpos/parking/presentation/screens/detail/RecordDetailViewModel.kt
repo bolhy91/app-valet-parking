@@ -1,14 +1,18 @@
 package com.mpos.parking.presentation.screens.detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mpos.parking.domain.models.RecordWithDetails
 import com.mpos.parking.domain.usecases.CalculateParkingCostUseCase
 import com.mpos.parking.domain.usecases.ProcessExitUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -24,6 +28,8 @@ class RecordDetailViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(RecordDetailState())
     val state: StateFlow<RecordDetailState> = _state.asStateFlow()
+
+    private var timerJob: Job? = null
 
     fun onEvent(event: RecordDetailEvent) {
         when (event) {
@@ -42,6 +48,8 @@ class RecordDetailViewModel @Inject constructor(
             is RecordDetailEvent.DismissMessage -> {
                 _state.update { it.copy(successMessage = null) }
             }
+
+            RecordDetailEvent.StopTimer -> stopTimeUpdateTimer()
         }
     }
 
@@ -57,16 +65,7 @@ class RecordDetailViewModel @Inject constructor(
                 )
             }
         } ?: run {
-            val currentTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-            val cost = calculateParkingCostUseCase(record.entryTime, currentTime)
-            val duration = calculateParkingCostUseCase
-                .getFormattedDuration(record.entryTime, currentTime)
-            _state.update {
-                it.copy(
-                    parkingCost = cost,
-                    parkingDuration = duration
-                )
-            }
+            startTimeUpdateTimer()
         }
     }
 
@@ -93,5 +92,38 @@ class RecordDetailViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    private fun startTimeUpdateTimer() {
+        timerJob?.cancel()
+        timerJob = viewModelScope.launch {
+            flow {
+                while (true) {
+                    emit(Unit)
+                    delay(1000)
+                }
+            }.collect {
+                val record = _state.value.record ?: return@collect
+                val currentTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                val duration = calculateParkingCostUseCase.getFormattedDuration(record.entryTime, currentTime)
+                val cost = calculateParkingCostUseCase(record.entryTime, currentTime)
+                _state.update {
+                    it.copy(
+                        parkingDuration = duration,
+                        parkingCost = cost
+                    )
+                }
+            }
+        }
+    }
+
+    private fun stopTimeUpdateTimer() {
+        timerJob?.cancel()
+        timerJob = null
+    }
+
+    override fun onCleared() {
+        startTimeUpdateTimer()
+        super.onCleared()
     }
 } 

@@ -21,6 +21,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -47,6 +48,12 @@ fun RecordDetailScreen(
     val state by viewModel.state.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val sheetState = rememberModalBottomSheetState()
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.onEvent(RecordDetailEvent.StopTimer)
+        }
+    }
 
     LaunchedEffect(record) {
         viewModel.onEvent(RecordDetailEvent.Initialize(record))

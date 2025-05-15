@@ -46,13 +46,11 @@ fun BottomBarNavigation(
                     label = { Text(text = item.title) },
                     onClick = {
                         navController.navigate(item.route) {
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
+                            popUpTo(navController.graph.startDestinationRoute!!) {
+                                inclusive = false
                             }
                             launchSingleTop = true
-                            restoreState = true
+                            restoreState = false
                         }
                     },
                     icon = {

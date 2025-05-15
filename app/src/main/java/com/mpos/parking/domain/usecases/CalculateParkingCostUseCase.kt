@@ -25,8 +25,9 @@ class CalculateParkingCostUseCase @Inject constructor() {
         val duration = exitInstant - entryInstant
         val hours = duration.inWholeHours
         val minutes = duration.inWholeMinutes % 60
+        val seconds = duration.inWholeSeconds % 60
         return when {
-            hours > 0 && minutes > 0 -> "$hours hora${if (hours > 1) "s" else ""} y $minutes minuto${if (minutes > 1) "s" else ""}"
+            hours > 0 && minutes > 0 -> "$hours hora${if (hours > 1) "s" else ""}, $minutes min${if (minutes > 1) "s  y $seconds seg" else ""}"
             hours > 0 -> "$hours hora${if (hours > 1) "s" else ""}"
             minutes > 0 -> "$minutes minuto${if (minutes > 1) "s" else ""}"
             else -> "Menos de un minuto"

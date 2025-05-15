@@ -7,4 +7,5 @@ sealed class RecordDetailEvent {
     data object ProcessExit : RecordDetailEvent()
     data object DismissDialog : RecordDetailEvent()
     data object DismissMessage : RecordDetailEvent()
+    data object StopTimer : RecordDetailEvent()
 } 
