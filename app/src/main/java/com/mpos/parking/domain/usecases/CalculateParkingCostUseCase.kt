@@ -29,7 +29,7 @@ class CalculateParkingCostUseCase @Inject constructor() {
         return when {
             hours > 0 && minutes > 0 -> "$hours hora${if (hours > 1) "s" else ""}, $minutes min${if (minutes > 1) "s  y $seconds seg" else ""}"
             hours > 0 -> "$hours hora${if (hours > 1) "s" else ""}"
-            minutes > 0 -> "$minutes minuto${if (minutes > 1) "s" else ""}"
+            minutes > 0 -> "$minutes minuto${if (minutes > 1) "s y $seconds seg" else ""}"
             else -> "Menos de un minuto"
         }
     }
