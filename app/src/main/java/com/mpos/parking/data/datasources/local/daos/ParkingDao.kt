@@ -9,7 +9,7 @@ import com.mpos.parking.data.datasources.local.entities.ParkingEntity
 
 @Dao
 interface ParkingDao {
-    @Query("SELECT * FROM parking WHERE free = 1")
+    @Query("SELECT * FROM parking WHERE busy = 0")
     suspend fun getAvailableSpots(): List<ParkingEntity>
 
     @Query("SELECT * FROM parking")

@@ -4,3 +4,5 @@ import com.mpos.parking.data.datasources.local.entities.DriverEntity
 import com.mpos.parking.domain.models.Driver
 
 fun DriverEntity.toDomain() = Driver(id, name, phone)
+
+fun Driver.toEntity() = DriverEntity(id, name, phone)

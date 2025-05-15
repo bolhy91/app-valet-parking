@@ -10,3 +10,11 @@ fun VehicleEntity.toDomain() = Vehicle(
     model = model,
     color = color,
 )
+
+fun Vehicle.toEntity() = VehicleEntity(
+    id,
+    license,
+    brand,
+    model,
+    color,
+)

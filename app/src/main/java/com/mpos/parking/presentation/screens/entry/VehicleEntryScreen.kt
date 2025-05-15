@@ -19,13 +19,15 @@ fun VehicleEntryScreen(
         model = uiState.vehicleModel,
         color = uiState.vehicleColor,
         position = uiState.position,
-        observation = uiState.observation,
+        availableParkingSpots = uiState.availableParkingSpots,
+        isLoading = uiState.isLoading,
+        error = uiState.error,
         onLicenseChanged = viewModel::updateVehicleLicense,
         onBrandChanged = viewModel::updateVehicleBrand,
         onModelChanged = viewModel::updateVehicleModel,
         onColorChanged = viewModel::updateVehicleColor,
         onPositionChanged = viewModel::updatePosition,
-        onObservationChanged = viewModel::updateObservation,
+        onRetryLoadingSpots = viewModel::retryLoadingParkingSpots,
         onRegisterClick = {
             if (viewModel.isVehicleFormValid()) {
                 navigateToHome()

@@ -11,4 +11,6 @@
     <string name="model">Modelo</string>
     <string name="color">Color</string>
     <string name="valet_parking">Valet Parking</string>
+    <string name="register_entry">Registrar Entrada</string>
+    <string name="retry">Reintentar</string>
 </resources>

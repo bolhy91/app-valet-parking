@@ -55,7 +55,6 @@ abstract class ParkingDatabase : RoomDatabase() {
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
                         parkingDummy(database.parkingDao())
-                        Log.d("ParkingDatabaseCallback", "Dummy data inserted successfully")
                     } catch (e: Exception) {
                         Log.e("ParkingDatabaseCallback", "Error inserting dummy data", e)
                     }
@@ -64,9 +63,9 @@ abstract class ParkingDatabase : RoomDatabase() {
         }
 
         private suspend fun parkingDummy(parkingDao: ParkingDao) {
-            val dummy = (1..20).map { number ->
+            val dummy = (10..20).map { number ->
                 val formattedNumber = "PA$number"
-                ParkingEntity(number = formattedNumber, free = false)
+                ParkingEntity(number = formattedNumber, busy = false)
             }
             parkingDao.insert(dummy)
         }

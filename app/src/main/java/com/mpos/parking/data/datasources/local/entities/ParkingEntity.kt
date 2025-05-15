@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "parking")
 data class ParkingEntity(
     @PrimaryKey val number: String,
-    val free: Boolean,
+    val busy: Boolean,
 )
