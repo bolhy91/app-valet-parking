@@ -57,6 +57,9 @@ La aplicación sigue los principios de Clean Architecture, dividiendo en carpeta
 - **Historial**: Pantalla donde se muestra el listado de vehiculos que usaron los estacionamientos y
   ya tienen fecha de salida.
 
+## Demo
+[![Ver el video](https://img.youtube.com/vi/TPMpMJbOPfI/0.jpg)](https://youtu.be/TPMpMJbOPfI)
+
 ## Requisitos del Sistema
 
 - Android 8.0 (API level 26) o superior
