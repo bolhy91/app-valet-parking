@@ -3,10 +3,10 @@ package com.mpos.parking.root
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ReceiptLong
 import androidx.compose.material.icons.automirrored.outlined.ReceiptLong
+import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.LocalParking
+import androidx.compose.material.icons.outlined.DirectionsCar
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.LocalParking
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class MainNavigation(
@@ -25,8 +25,8 @@ sealed class MainNavigation(
     data object Entry : MainNavigation(
         route = EntryRoute,
         title = "Nuevo Ingreso",
-        selectedIcon = Icons.Filled.LocalParking,
-        unSelectedIcon = Icons.Outlined.LocalParking
+        selectedIcon = Icons.Filled.DirectionsCar,
+        unSelectedIcon = Icons.Outlined.DirectionsCar
     )
 
     data object Record : MainNavigation(

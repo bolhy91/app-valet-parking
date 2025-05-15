@@ -14,34 +14,35 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getActiveRecordsWithDetailsUseCase: GetActiveRecordsWithDetailsUseCase
+    private val getActiveRecordsWithDetailsUseCase: GetActiveRecordsWithDetailsUseCase,
 ) : ViewModel() {
-    
+
     private val _state = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
-    
+
     init {
         onEvent(HomeEvent.LoadActiveRecords)
     }
-    
+
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.LoadActiveRecords -> {
                 loadActiveRecords()
             }
+
             is HomeEvent.RefreshActiveRecords -> {
                 loadActiveRecords()
             }
         }
     }
-    
+
     private fun loadActiveRecords() {
         _state.update { it.copy(isLoading = true) }
-        
+
         getActiveRecordsWithDetailsUseCase().onEach { result ->
             result.fold(
                 onSuccess = { records ->
-                    _state.update { 
+                    _state.update {
                         it.copy(
                             activeRecords = records,
                             isLoading = false,
@@ -50,7 +51,7 @@ class HomeViewModel @Inject constructor(
                     }
                 },
                 onFailure = { error ->
-                    _state.update { 
+                    _state.update {
                         it.copy(
                             isLoading = false,
                             error = "Error al cargar registros: ${error.message}"

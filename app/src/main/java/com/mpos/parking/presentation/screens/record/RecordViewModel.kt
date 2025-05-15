@@ -18,8 +18,8 @@ class RecordViewModel @Inject constructor(
     private val getRecordsWithDetailsUseCase: GetRecordsWithDetailsUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(RecordState())
+    val state: StateFlow<RecordState> = _state.asStateFlow()
 
     init {
         onEvent(RecordEvent.LoadOldRecords)
