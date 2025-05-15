@@ -16,4 +16,4 @@ fun EntityRecordWithDetails.toDomain(): DomainRecordWithDetails {
         entryTime = entry.entryTime,
         exitTime = entry.exitTime
     )
-} 
+}

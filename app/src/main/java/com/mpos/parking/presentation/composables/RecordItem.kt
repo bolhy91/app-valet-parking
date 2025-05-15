@@ -1,5 +1,6 @@
 package com.mpos.parking.presentation.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,11 +28,13 @@ import com.mpos.parking.domain.models.RecordWithDetails
 fun RecordItem(
     record: RecordWithDetails,
     modifier: Modifier = Modifier,
+    onClick: (RecordWithDetails) -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable { onClick(record) },
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -100,7 +103,7 @@ fun RecordItem(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 } else {
-                    TextButton(onClick = {}) {
+                    TextButton(onClick = { onClick(record) }) {
                         Text(
                             text = stringResource(R.string.marcar_salida),
                             style = MaterialTheme.typography.bodyMedium,

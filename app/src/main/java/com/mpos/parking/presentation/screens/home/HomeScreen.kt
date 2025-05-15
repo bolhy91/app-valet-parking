@@ -21,6 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -29,13 +32,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mpos.parking.R
+import com.mpos.parking.domain.models.RecordWithDetails
 import com.mpos.parking.presentation.composables.RecordItem
+import com.mpos.parking.presentation.screens.detail.RecordDetailScreen
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
+    var selectedRecord by remember { mutableStateOf<RecordWithDetails?>(null) }
 
     Box(
         modifier = Modifier
@@ -105,7 +111,8 @@ fun HomeScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(state.activeRecords) { record ->
-                            RecordItem(record = record)
+                            RecordItem(
+                                record = record, onClick = { selectedRecord = it })
                         }
 
                         item {
@@ -114,6 +121,11 @@ fun HomeScreen(
                     }
                 }
             }
+        }
+
+        selectedRecord?.let { record ->
+            RecordDetailScreen(
+                record = record, onDismiss = { selectedRecord = null })
         }
     }
 }

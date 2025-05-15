@@ -13,7 +13,7 @@ class ParkingRepositoryImpl @Inject constructor(
         return parkingDao.getAvailableSpots().map { it.toDomain() }
     }
 
-    override suspend fun updateParkingStatus(spotNumber: String, isFree: Boolean) {
+    override suspend fun updateParkingAvailability(spotNumber: String, isFree: Boolean) {
         val spot = parkingDao.getParkingSpotByNumber(spotNumber)
         spot?.let {
             parkingDao.updateSpot(it.copy(busy = !isFree))

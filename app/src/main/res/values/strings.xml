@@ -16,7 +16,7 @@
     <string name="position">Posición: %1$s</string>
     <string name="entry_time">Entrada: %1$s</string>
     <string name="driver_name">Conductor: %1$s</string>
-    <string name="vehicle_name">Vehículo: %1$s %2$s (%3$s)</string>
+    <string name="vehicle_name">Vehículo: %1$s</string>
     <string name="plate_name">Placa: %1$s</string>
     <string name="marcar_salida">Marcar Salida</string>
     <string name="home_parking_not_data">No hay vehículos estacionados actualmente</string>
@@ -25,4 +25,14 @@
     <string name="exit_time">Salida: %1$s</string>
     <string name="historial_vehicle">Historial de Vehículos: %1$s</string>
     <string name="not_data_historial">No contiene vehículos en su historial</string>
+    <string name="detalles_estacionamiento">Detalle del Parking</string>
+    <string name="detalles_vehiculo">Detalle del Auto</string>
+    <string name="detalles_costo">Costo</string>
+    <string name="tiempo_estacionado">Tiempo Estacionamiento</string>
+    <string name="costo_total">Costo Total</string>
+    <string name="procesar_salida">Procesar Salida</string>
+    <string name="parking">Estacionamiento</string>
+    <string name="start_time">Entrada</string>
+    <string name="end_time">Salida</string>
+    <string name="puesto">Puesto</string>
 </resources>

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ParkingRepository {
     suspend fun getAvailableParking(): List<Parking>
-    suspend fun updateParkingStatus(spotNumber: String, isFree: Boolean)
+    suspend fun updateParkingAvailability(spotNumber: String, isFree: Boolean)
 }

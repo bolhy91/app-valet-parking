@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.mpos.parking.data.datasources.local.entities.RecordEntity
 import com.mpos.parking.data.datasources.local.relations.RecordWithDetails
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,9 @@ import kotlinx.coroutines.flow.Flow
 interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(record: RecordEntity): Long
+
+    @Update
+    suspend fun update(record: RecordEntity): Int
 
     @Query("SELECT * FROM records WHERE id = :id")
     suspend fun getRecordById(id: Int): RecordEntity?

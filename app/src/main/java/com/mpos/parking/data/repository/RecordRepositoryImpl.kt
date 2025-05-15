@@ -17,6 +17,10 @@ class RecordRepositoryImpl @Inject constructor(
         return recordDao.insert(record.toEntity())
     }
 
+    override suspend fun updateRecord(record: Record): Int {
+        return recordDao.update(record.toEntity())
+    }
+
     override suspend fun getRecordById(id: Int): Record? {
         return recordDao.getRecordById(id)?.toDomain()
     }

@@ -56,7 +56,7 @@ class RegisterEntryUseCase @Inject constructor(
                 observation = null
             )
             recordRepository.insertRecord(record)
-            parkingRepository.updateParkingStatus(parkingSpotNumber, false)
+            parkingRepository.updateParkingAvailability(parkingSpotNumber, false)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
