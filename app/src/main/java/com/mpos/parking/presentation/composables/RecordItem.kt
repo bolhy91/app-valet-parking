@@ -1,4 +1,4 @@
-package com.mpos.parking.presentation.screens.home.components
+package com.mpos.parking.presentation.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -54,8 +54,7 @@ fun RecordItem(
                 )
                 Text(
                     text = stringResource(
-                        R.string.entry_time,
-                        record.formatDateTime(record.entryTime)
+                        R.string.entry_time, record.formatDateTime(record.entryTime)
                     ),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -92,13 +91,23 @@ fun RecordItem(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
-                TextButton(onClick = {}) {
+                if (record.exitTime != null) {
                     Text(
-                        text = stringResource(R.string.marcar_salida),
+                        text = stringResource(
+                            R.string.exit_time, record.formatDateTime(record.exitTime)
+                        ),
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                } else {
+                    TextButton(onClick = {}) {
+                        Text(
+                            text = stringResource(R.string.marcar_salida),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }

@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetActiveRecordsWithDetailsUseCase @Inject constructor(
-    private val recordRepository: RecordRepository
+class GetRecordsWithDetailsUseCase @Inject constructor(
+    private val recordRepository: RecordRepository,
 ) {
     operator fun invoke(): Flow<Result<List<RecordWithDetails>>> {
-        return recordRepository.getRecordsWithDetails()
-            .map { records -> 
-                Result.success(records) 
+        return recordRepository.getRecordsWithDetails(false)
+            .map { records ->
+                Result.success(records)
             }
             .catch { e ->
                 emit(Result.failure(e))

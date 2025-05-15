@@ -8,5 +8,5 @@ interface RecordRepository {
     suspend fun insertRecord(record: Record): Long
     suspend fun getRecordById(id: Int): Record?
     suspend fun getActiveRecords(): List<Record>
-    fun getActiveRecordsWithDetails(): Flow<List<RecordWithDetails>>
-} 
+    fun getRecordsWithDetails(active: Boolean = true): Flow<List<RecordWithDetails>>
+}

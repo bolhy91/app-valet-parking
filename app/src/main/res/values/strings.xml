@@ -22,4 +22,7 @@
     <string name="home_parking_not_data">No hay vehículos estacionados actualmente</string>
     <string name="vehicle_size">Vehículos estacionados: %1$s</string>
     <string name="error_desconocido">Error desconocido</string>
+    <string name="exit_time">Salida: %1$s</string>
+    <string name="historial_vehicle">Historial de Vehículos: %1$s</string>
+    <string name="not_data_historial">No contiene vehículos en su historial</string>
 </resources>

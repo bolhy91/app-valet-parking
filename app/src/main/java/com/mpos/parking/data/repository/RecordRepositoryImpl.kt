@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RecordRepositoryImpl @Inject constructor(
-    private val recordDao: RecordDao
+    private val recordDao: RecordDao,
 ) : RecordRepository {
     override suspend fun insertRecord(record: Record): Long {
         return recordDao.insert(record.toEntity())
@@ -24,10 +24,16 @@ class RecordRepositoryImpl @Inject constructor(
     override suspend fun getActiveRecords(): List<Record> {
         return recordDao.getActiveRecords().map { it.toDomain() }
     }
-    
-    override fun getActiveRecordsWithDetails(): Flow<List<RecordWithDetails>> {
-        return recordDao.getActiveRecordsWithDetails().map { records ->
-            records.map { it.toDomain() }
+
+    override fun getRecordsWithDetails(active: Boolean): Flow<List<RecordWithDetails>> {
+        return if (active) {
+            recordDao.getActiveRecordsWithDetails().map { records ->
+                records.map { it.toDomain() }
+            }
+        } else {
+            recordDao.getRecordsWithDetails().map { records ->
+                records.map { it.toDomain() }
+            }
         }
     }
 } 
