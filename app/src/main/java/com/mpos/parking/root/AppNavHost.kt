@@ -58,7 +58,7 @@ fun AppNavHost() {
                 HomeScreen()
             }
             composable<EntryRoute> {
-                EntryNav { navigator.navigate(HomeRoute) }
+                EntryNav()
             }
             composable<RecordRoute> {
                 RecordScreen()

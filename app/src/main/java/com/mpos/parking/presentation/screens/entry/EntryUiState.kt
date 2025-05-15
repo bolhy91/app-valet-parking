@@ -13,5 +13,8 @@ data class EntryUiState(
     val position: String = "",
     val isLoading: Boolean = false,
     val error: String? = null,
+    val successMessage: String? = null,
+    val licenseError: String? = null,
+    val isCheckingLicense: Boolean = false,
     val availableParkingSpots: List<Parking> = emptyList()
 )

@@ -7,9 +7,16 @@ import com.mpos.parking.domain.repository.ParkingRepository
 import javax.inject.Inject
 
 class ParkingRepositoryImpl @Inject constructor(
-    private val parkingDao: ParkingDao
+    private val parkingDao: ParkingDao,
 ) : ParkingRepository {
-    override suspend fun getAvailableParkingSpots(): List<Parking> {
+    override suspend fun getAvailableParking(): List<Parking> {
         return parkingDao.getAvailableSpots().map { it.toDomain() }
+    }
+
+    override suspend fun updateParkingStatus(spotNumber: String, isFree: Boolean) {
+        val spot = parkingDao.getParkingSpotByNumber(spotNumber)
+        spot?.let {
+            parkingDao.updateSpot(it.copy(busy = !isFree))
+        }
     }
 } 

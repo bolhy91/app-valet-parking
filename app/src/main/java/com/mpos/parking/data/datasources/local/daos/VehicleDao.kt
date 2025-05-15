@@ -11,9 +11,9 @@ interface VehicleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vehicle: VehicleEntity): Long
 
-    @Query("SELECT * FROM vehicles WHERE license = :license LIMIT 1")
-    suspend fun getByLicense(license: String): VehicleEntity?
+    @Query("SELECT * FROM vehicles WHERE id = :id")
+    suspend fun getVehicleById(id: Int): VehicleEntity?
 
-    @Query("SELECT * FROM vehicles")
-    suspend fun getAll(): List<VehicleEntity>
+    @Query("SELECT * FROM vehicles WHERE license = :license")
+    suspend fun getVehicleByLicense(license: String): VehicleEntity?
 }

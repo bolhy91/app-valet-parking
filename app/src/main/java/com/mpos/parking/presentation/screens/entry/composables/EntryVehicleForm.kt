@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.mpos.parking.R
 import com.mpos.parking.domain.models.Parking
 import com.mpos.parking.presentation.composables.TextFieldInput
+import com.mpos.parking.presentation.screens.entry.composables.ParkingSpotSelector
 
 @Composable
 fun EntryVehicleForm(
@@ -37,6 +38,8 @@ fun EntryVehicleForm(
     availableParkingSpots: List<Parking>,
     isLoading: Boolean,
     error: String?,
+    licenseError: String?,
+    isCheckingLicense: Boolean,
     onLicenseChanged: (String) -> Unit,
     onBrandChanged: (String) -> Unit,
     onModelChanged: (String) -> Unit,
@@ -68,7 +71,10 @@ fun EntryVehicleForm(
             modifier = Modifier.fillMaxWidth(),
             leadingIcon = Icons.Outlined.DriveFileRenameOutline,
             keyboardCapitalization = KeyboardCapitalization.Characters,
-            imeAction = ImeAction.Next
+            imeAction = ImeAction.Next,
+            isError = licenseError != null,
+            errorMessage = licenseError ?: "",
+            trailingIcon = if (isCheckingLicense) Icons.Outlined.DirectionsCar else null
         )
 
         TextFieldInput(
@@ -97,6 +103,7 @@ fun EntryVehicleForm(
             leadingIcon = Icons.Outlined.ColorLens,
             imeAction = ImeAction.Done
         )
+
         if (isLoading) {
             CircularProgressIndicator()
         } else if (error != null) {
@@ -125,11 +132,13 @@ fun EntryVehicleForm(
         Button(
             onClick = onRegisterClick,
             modifier = Modifier.fillMaxWidth(),
-            enabled = license.isNotBlank() &&
-                    brand.isNotBlank() &&
-                    model.isNotBlank() &&
-                    color.isNotBlank() &&
-                    position.isNotBlank()
+            enabled = license.isNotBlank() && 
+                    licenseError == null &&  // Deshabilitamos el botón si hay error en la placa
+                    brand.isNotBlank() && 
+                    model.isNotBlank() && 
+                    color.isNotBlank() && 
+                    position.isNotBlank() &&
+                    !isCheckingLicense  // Deshabilitamos el botón mientras se verifica la placa
         ) {
             Text(text = stringResource(R.string.register_entry))
         }

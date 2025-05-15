@@ -5,9 +5,9 @@ import com.mpos.parking.domain.repository.ParkingRepository
 import javax.inject.Inject
 
 class GetAvailableParkingUseCase @Inject constructor(
-    private val parkingRepository: ParkingRepository
+    private val parkingRepository: ParkingRepository,
 ) {
     suspend operator fun invoke(): List<Parking> {
-        return parkingRepository.getAvailableParkingSpots()
+        return parkingRepository.getAvailableParking()
     }
 } 

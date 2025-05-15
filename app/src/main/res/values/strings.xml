@@ -13,4 +13,13 @@
     <string name="valet_parking">Valet Parking</string>
     <string name="register_entry">Registrar Entrada</string>
     <string name="retry">Reintentar</string>
+    <string name="position">Posición: %1$s</string>
+    <string name="entry_time">Entrada: %1$s</string>
+    <string name="driver_name">Conductor: %1$s</string>
+    <string name="vehicle_name">Vehículo: %1$s %2$s (%3$s)</string>
+    <string name="plate_name">Placa: %1$s</string>
+    <string name="marcar_salida">Marcar Salida</string>
+    <string name="home_parking_not_data">No hay vehículos estacionados actualmente</string>
+    <string name="vehicle_size">Vehículos estacionados: %1$s</string>
+    <string name="error_desconocido">Error desconocido</string>
 </resources>

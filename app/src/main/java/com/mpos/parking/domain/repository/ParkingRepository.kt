@@ -4,5 +4,6 @@ import com.mpos.parking.domain.models.Parking
 import kotlinx.coroutines.flow.Flow
 
 interface ParkingRepository {
-    suspend fun getAvailableParkingSpots(): List<Parking>
-} 
+    suspend fun getAvailableParking(): List<Parking>
+    suspend fun updateParkingStatus(spotNumber: String, isFree: Boolean)
+}

@@ -17,6 +17,9 @@ interface ParkingDao {
     
     @Query("SELECT COUNT(*) FROM parking")
     suspend fun getParkingCount(): Int
+    
+    @Query("SELECT * FROM parking WHERE number = :number")
+    suspend fun getParkingSpotByNumber(number: String): ParkingEntity?
 
     @Update
     suspend fun updateSpot(spot: ParkingEntity)
